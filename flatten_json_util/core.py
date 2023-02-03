@@ -1,4 +1,8 @@
-"""Core JSON flattening logic."""
+"""Core JSON flattening logic.
+
+Recursively flattens nested JSON structures (dicts and lists) into
+flat dictionaries with compound keys separated by underscores.
+"""
 
 
 def _is_scalar(value):
@@ -7,7 +11,16 @@ def _is_scalar(value):
 
 
 def _flatten_dict(dict_key, data, c_str=None):
-    """Flatten a nested dictionary within a parent container."""
+    """Flatten a nested dictionary within a parent container.
+
+    Args:
+        dict_key: The key in ``data`` that points to the dict to flatten.
+        data: The parent container (dict or list).
+        c_str: Accumulated prefix string for key naming.
+
+    Returns:
+        A flat dictionary with compound keys.
+    """
     result = {}
     if dict_key is None:
         dict_key = ""
@@ -29,7 +42,17 @@ def _flatten_dict(dict_key, data, c_str=None):
 
 
 def _flatten_list(data, dict_key=None, c_str=None):
-    """Flatten a nested list within a parent container."""
+    """Flatten a nested list within a parent container.
+
+    Args:
+        data: The parent container (dict or list).
+        dict_key: The key in ``data`` that points to the list to flatten.
+            If ``None``, ``data`` itself is treated as the list.
+        c_str: Accumulated prefix string for key naming.
+
+    Returns:
+        A flat dictionary with compound keys.
+    """
     result = {}
     if dict_key is None:
         dict_key = ""
@@ -55,7 +78,18 @@ def _flatten_list(data, dict_key=None, c_str=None):
 
 
 def flatten_single(data):
-    """Flatten a single JSON object (dict or list) into a flat dictionary."""
+    """Flatten a single JSON object (dict or list) into a flat dictionary.
+
+    Args:
+        data: A dict or list to flatten.
+
+    Returns:
+        A list containing one flat dictionary.
+
+    Example:
+        >>> flatten_single({"a": {"b": 1, "c": 2}})
+        [{'a_b': 1, 'a_c': 2}]
+    """
     result = {}
     if isinstance(data, dict):
         for key in data.keys():
