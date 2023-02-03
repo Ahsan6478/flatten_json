@@ -52,3 +52,19 @@ def _flatten_list(data, dict_key=None, c_str=None):
             result[f"{prefix}_{num}"] = value
 
     return result
+
+
+def flatten_single(data):
+    """Flatten a single JSON object (dict or list) into a flat dictionary."""
+    result = {}
+    if isinstance(data, dict):
+        for key in data.keys():
+            if isinstance(data[key], dict):
+                result.update(_flatten_dict(key, data))
+            elif isinstance(data[key], list):
+                result.update(_flatten_list(data, key))
+            else:
+                result[key] = data[key]
+    elif isinstance(data, list):
+        result.update(_flatten_list(data))
+    return [result]
