@@ -102,3 +102,35 @@ def flatten_single(data):
     elif isinstance(data, list):
         result.update(_flatten_list(data))
     return [result]
+
+
+def flatten_json(data):
+    """Flatten a dictionary of records into a list of flat dictionaries.
+
+    Expects ``data`` to be a dict where each value is itself a dict
+    representing one record.
+
+    Args:
+        data: A dict of dicts (e.g. ``{"record1": {...}, "record2": {...}}``).
+
+    Returns:
+        A list of flat dictionaries, one per record.
+
+    Example:
+        >>> flatten_json({"r1": {"name": "Alice", "addr": {"city": "NY"}}})
+        [{'name': 'Alice', 'addr_city': 'NY'}]
+    """
+    results = []
+    for key in data:
+        record = data[key]
+        flat = {}
+        for field in record.keys():
+            value = record[field]
+            if isinstance(value, dict):
+                flat.update(_flatten_dict(field, record))
+            elif isinstance(value, list):
+                flat.update(_flatten_list(record, field))
+            else:
+                flat[field] = value
+        results.append(flat)
+    return results
