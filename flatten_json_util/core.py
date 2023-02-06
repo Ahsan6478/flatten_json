@@ -134,3 +134,40 @@ def flatten_json(data):
                 flat[field] = value
         results.append(flat)
     return results
+
+
+def flatten(data):
+    """Flatten any JSON structure into a list of flat dictionaries.
+
+    Automatically detects the input type:
+    - If ``data`` is a list of dicts, each dict is flattened individually.
+    - If ``data`` is a single dict, it is flattened as one record.
+
+    This is the recommended entry point for most use cases.
+
+    Args:
+        data: A JSON-compatible Python object (dict, list of dicts, etc.).
+
+    Returns:
+        A list of flat dictionaries.
+
+    Example:
+        >>> flatten({"user": {"name": "Alice", "scores": [10, 20]}})
+        [{'user_name': 'Alice', 'user_scores_0': 10, 'user_scores_1': 20}]
+
+        >>> flatten([{"a": 1, "b": {"c": 2}}, {"a": 3}])
+        [{'a': 1, 'b_c': 2}, {'a': 3}]
+    """
+    if isinstance(data, list):
+        results = []
+        for item in data:
+            if isinstance(item, dict):
+                results.extend(flatten_single(item))
+            else:
+                results.extend(flatten_single(data))
+                break
+        return results
+    elif isinstance(data, dict):
+        return flatten_single(data)
+    else:
+        raise TypeError(f"Expected dict or list, got {type(data).__name__}")
