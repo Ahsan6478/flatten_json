@@ -6,14 +6,33 @@ build-backend = "setuptools.backends._legacy:_Backend"
 name = "flatten-json-util"
 version = "0.1.0"
 description = "Recursively flatten nested JSON structures into flat dictionaries"
+readme = "README.md"
 license = "MIT"
 requires-python = ">=3.8"
 authors = [
     { name = "Ahsan" },
 ]
+keywords = ["json", "flatten", "nested", "pandas", "csv", "excel"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
 dependencies = [
     "pandas>=1.0",
     "xlsxwriter>=1.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
 ]
 
 [tool.setuptools.packages.find]
