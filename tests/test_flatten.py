@@ -54,3 +54,15 @@ class TestFlatten:
     def test_invalid_type(self):
         with pytest.raises(TypeError):
             flatten("not json")
+
+
+class TestFlattenJson:
+    def test_dict_of_records(self):
+        data = {
+            "record1": {"name": "Alice", "age": "30"},
+            "record2": {"name": "Bob", "age": "25"},
+        }
+        result = flatten_json(data)
+        assert len(result) == 2
+        assert result[0]["name"] == "Alice"
+        assert result[1]["name"] == "Bob"
