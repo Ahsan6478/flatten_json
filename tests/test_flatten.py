@@ -1,6 +1,7 @@
 """Tests for flatten_json_util."""
 
-from flatten_json_util import flatten_single
+import pytest
+from flatten_json_util import flatten, flatten_single, flatten_json
 
 
 class TestFlattenSingle:
@@ -29,6 +30,27 @@ class TestFlattenSingle:
         result = flatten_single(data)
         assert result == [{"name": "test", "count": 5, "active": True, "value": None}]
 
+    def test_list_of_dicts(self):
+        data = {"items": [{"name": "a"}, {"name": "b"}]}
+        result = flatten_single(data)
+        assert result == [{"items_0_name": "a", "items_1_name": "b"}]
+
     def test_empty_dict(self):
         result = flatten_single({})
         assert result == [{}]
+
+
+class TestFlatten:
+    def test_single_dict(self):
+        data = {"a": 1}
+        result = flatten(data)
+        assert result == [{"a": 1}]
+
+    def test_list_of_dicts(self):
+        data = [{"a": 1, "b": {"c": 2}}, {"a": 3}]
+        result = flatten(data)
+        assert result == [{"a": 1, "b_c": 2}, {"a": 3}]
+
+    def test_invalid_type(self):
+        with pytest.raises(TypeError):
+            flatten("not json")
