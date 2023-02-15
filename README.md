@@ -77,3 +77,22 @@ data = {
 flatten_json(data)
 # [{'name': 'Alice', 'info_age': 30}, {'name': 'Bob', 'info_age': 25}]
 ```
+
+### Export Functions
+
+Export flattened data directly to CSV, Excel, or a pandas DataFrame:
+
+```python
+from flatten_json_util import to_csv, to_excel, to_dataframe
+
+data = {"users": [{"name": "Alice"}, {"name": "Bob"}]}
+
+# Export to CSV
+to_csv(data, "output")       # creates output.csv
+
+# Export to Excel
+to_excel(data, "output")     # creates output.xlsx
+
+# Get a pandas DataFrame
+df = to_dataframe(data)
+```
