@@ -103,3 +103,14 @@ All JSON-compatible Python types are handled:
 - `str`, `int`, `float`, `bool`, `None` -- kept as leaf values
 - `dict` -- recursively flattened with underscore-joined keys
 - `list` -- elements indexed by position (0, 1, 2, ...)
+
+## Running Tests
+
+```bash
+pip install -e ".[dev]"
+pytest
+```
+
+## License
+
+MIT
