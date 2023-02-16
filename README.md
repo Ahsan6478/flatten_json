@@ -96,3 +96,10 @@ to_excel(data, "output")     # creates output.xlsx
 # Get a pandas DataFrame
 df = to_dataframe(data)
 ```
+
+## Supported Value Types
+
+All JSON-compatible Python types are handled:
+- `str`, `int`, `float`, `bool`, `None` -- kept as leaf values
+- `dict` -- recursively flattened with underscore-joined keys
+- `list` -- elements indexed by position (0, 1, 2, ...)
