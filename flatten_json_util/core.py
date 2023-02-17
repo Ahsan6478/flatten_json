@@ -1,7 +1,10 @@
 """Core JSON flattening logic.
 
 Recursively flattens nested JSON structures (dicts and lists) into
-flat dictionaries with compound keys separated by underscores.
+flat dictionaries with compound underscore-separated keys.
+
+Handles all JSON-compatible Python types: str, int, float, bool, None
+as leaf values, and recursively processes nested dicts and lists.
 """
 
 
