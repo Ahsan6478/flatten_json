@@ -1,4 +1,8 @@
-"""Export flattened JSON data to various formats."""
+"""Export flattened JSON data to various formats.
+
+Provides functions to convert nested JSON data directly
+to CSV, Excel, or pandas DataFrame output.
+"""
 
 import pandas as pd
 
