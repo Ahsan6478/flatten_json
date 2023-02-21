@@ -139,7 +139,7 @@ def flatten_json(data):
     return results
 
 
-def flatten(data):
+def flatten(data):  # noqa: C901
     """Flatten any JSON structure into a list of flat dictionaries.
 
     Automatically detects the input type:
