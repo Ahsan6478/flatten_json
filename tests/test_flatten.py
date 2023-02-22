@@ -61,6 +61,13 @@ class TestFlatten:
             flatten("not json")
 
 
+class TestFlattenNested:
+    def test_three_levels_deep(self):
+        data = {"a": {"b": {"c": {"d": "value"}}}}
+        result = flatten(data)
+        assert result == [{"a_b_c_d": "value"}]
+
+
 class TestFlattenJson:
     def test_dict_of_records(self):
         data = {
