@@ -1,4 +1,4 @@
-"""Tests for flatten_json_util."""
+"""Tests for flatten_json_util core functionality."""
 
 import pytest
 from flatten_json_util import flatten, flatten_single, flatten_json
