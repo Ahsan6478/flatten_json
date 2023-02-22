@@ -35,6 +35,11 @@ class TestFlattenSingle:
         result = flatten_single(data)
         assert result == [{"items_0_name": "a", "items_1_name": "b"}]
 
+    def test_nested_list_of_dicts(self):
+        data = {"items": [{"name": "a"}, {"name": "b"}]}
+        result = flatten_single(data)
+        assert result == [{"items_0_name": "a", "items_1_name": "b"}]
+
     def test_empty_dict(self):
         result = flatten_single({})
         assert result == [{}]
