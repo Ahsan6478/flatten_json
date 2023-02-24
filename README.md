@@ -1,5 +1,7 @@
 # flatten-json-util
 
+[![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
+
 Recursively flatten nested JSON structures (dicts and lists) into flat dictionaries with compound underscore-separated keys.
 
 ## Installation
