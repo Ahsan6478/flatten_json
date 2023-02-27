@@ -1,4 +1,4 @@
-from .core import flatten, flatten_json, flatten_single  # noqa: F401
+from .core import flatten, flatten_json, flatten_single
 
 __version__ = "1.0.0"
 __all__ = [
